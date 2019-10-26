@@ -1,0 +1,14 @@
+.order{
+    position: absolute;
+    top:25%;
+    left:10%;
+    background: #fff;
+    padding:30px;
+}
+.order__menu-wrap{
+    display: flex;
+    flex-direction: column;
+}
+.order__menu-direction{
+    
+}

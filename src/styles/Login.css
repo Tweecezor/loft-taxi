@@ -1,0 +1,33 @@
+.login{
+    background-color: #fff;
+    padding: 60px 50px;
+    border-radius: 3px;
+}
+.login__form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.login__form-wrap{
+    display: flex;
+    flex-direction: column;
+    width:100%
+}
+.login__caption-wrap{
+    margin-bottom: 10px;
+}
+.login__question{
+    margin-bottom: 20px;
+}
+
+.login__form-input{
+   margin-bottom: 10px;
+}
+.login__form-submit{
+    padding: 15px 20px;
+    background-color: #ffc617;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    border:none;
+}
