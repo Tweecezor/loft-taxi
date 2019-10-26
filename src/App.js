@@ -14,8 +14,8 @@ const PAGES ={
 }
 
 function App() {
-    const[page,setState] = React.useState('login');
-    
+    const[page,setState] = React.useState('login')
+
     return (
         <div>
             <div className = 'header-wrap'>
