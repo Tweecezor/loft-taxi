@@ -42,10 +42,10 @@ class Map extends React.Component {
 
  
 
-            <div>
+            <>
                 <div id = 'map' ></div>
                 {/* <div onClick = {this.handler}>фавыпкуие</div> */}
-            </div>
+            </>
             
         );
     }
