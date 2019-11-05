@@ -1,21 +1,10 @@
 import React,{useState} from 'react';
 import '../styles/Registration.css';
-
+import PropTypes from 'prop-types';
 
 // class Registration extends React.Component{
-const Registration = ({setPageProp}) => {
-    // state = {
-    //     email: '' ,
-    //     name : '' ,
-    //     surename : '' ,
-    //     password : ''
-    // };
-    // submitRegistration = ()=>{
-    //     console.log('sgrdet');
-    // }
-    // handleInput = (e) => {
-    //     this.setState({[e.target.id]:e.target.value});
-    // }
+const Registration = ({setBlock}) => {
+
     var[name,setName] = useState('');
     var[surename,setSurename] = useState('');
     var[password,setPassword] = useState('');
@@ -23,7 +12,7 @@ const Registration = ({setPageProp}) => {
 
     const handleOpenLogin = (e) => {
         e.preventDefault();
-        setPageProp('login')
+        setBlock('login')
     }
 
     const handleInputPassword = (e) => {
@@ -70,6 +59,9 @@ const Registration = ({setPageProp}) => {
                 </form>
             </div>
         )
-    
 }
+Registration.propTypes = {
+    setBlock: PropTypes.func
+}
+
 export default Registration;
