@@ -18,7 +18,7 @@ const HeaderComponent = ({setPageProp}) =>{
                     </div>
                     <nav className = 'nav nav--header'>
                         <ul className = 'nav__list'>
-                            <li className="nav__item" onClick = {e=>{setPageProp('map')}}>Карта</li>
+                            <li className="nav__item active" onClick = {e=>{setPageProp('map')}}>Карта</li>
                             <li className="nav__item" onClick = {e=>{setPageProp('profile')}}>Профиль</li>
                             <li className="nav__item" onClick = {()=>context.logout()}>Выйти</li>
 
