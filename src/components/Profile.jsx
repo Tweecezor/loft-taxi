@@ -18,7 +18,7 @@ const Profile = (props) => {
         console.log(props)
        props.getCardData(props.userToken);
     },[flag]);
-
+    //var
     // var [cardNumber,setCardNumber] = React.useState(props.cardsData.cardNumber);
     // var [cardData,setCardData] = React.useState(props.cardsData.cardData);
     // var [cardOwner,setCardOwner] = React.useState(props.cardsData.cardOwner);
