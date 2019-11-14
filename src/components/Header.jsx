@@ -2,12 +2,26 @@ import React,{useContext} from 'react';
 import PropTypes from 'prop-types'
 import '../styles/Header.css';
 import myContext from '../context'
+import { Link, Route, Switch } from 'react-router-dom';
+import Map from '../components/Map';
+import Profile from '../components/Profile';
+import {LogoutAction,getProfileDataRequest} from '../Actions/actions';
+import { connect } from 'react-redux';
 
 
+const HeaderComponent = (props) =>{
 
 
-const HeaderComponent = ({setPageProp}) =>{
-    const context = useContext(myContext);
+    const onClickLogoutButton = (e) => {
+        e.preventDefault();
+        // console.log(LogginAction());
+        // debugger;
+        props.userLogout()
+    }
+    const onClickProfile = (e) => {
+        // props.getCardData(props.userToken);
+    }
+
     return(
         <div className = 'header-wrap'>
             <div className = 'container'>
@@ -18,17 +32,26 @@ const HeaderComponent = ({setPageProp}) =>{
                     </div>
                     <nav className = 'nav nav--header'>
                         <ul className = 'nav__list'>
-                            <li className="nav__item" onClick = {e=>{setPageProp('map')}}>Карта</li>
-                            <li className="nav__item" onClick = {e=>{setPageProp('profile')}}>Профиль</li>
-                            <li className="nav__item" onClick = {()=>context.logout()}>Выйти</li>
-
-
-                            {/* <li className="nav__item" onClick = {setPageProp('text')}>Выйти</li> */}
+                            <li className="nav__item active">
+                                <Link to={`/map`} className = 'nav__link'>Карта</Link>{' '}  
+                            </li>
+                            <li className="nav__item" >
+                                <Link to={`/profile`} className = 'nav__link' onClick = {onClickProfile}>Профиль</Link>{' '} 
+                            </li>
+                            <li className="nav__item" >
+                                <Link to={`/login`} className = 'nav__link' onClick = {onClickLogoutButton}>Выйти</Link>{' '} 
+                            </li>
                         </ul>
                     </nav>
                 </header>
             </div>
+            <Switch>
+                <Route path="/map" component={Map} exact />
+                <Route path="/profile" component={Profile} />
+            </Switch>
         </div>
+
+       
     )
     
 };
@@ -36,4 +59,24 @@ HeaderComponent.propTypes = {
     setPageProp: PropTypes.func
 };
 
-export default HeaderComponent;
+const mapStateToProps = (state) => {
+    return({
+        userToken:state.LoginReducer.userToken
+    })
+}
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        userLogout : ()=> {
+            dispatch(LogoutAction());
+        },
+        // getCardData : (userToken)=>{ 
+        //     dispatch(getProfileDataRequest({userToken}))
+        // }
+    })
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HeaderComponent)
+// export default HeaderComponent;

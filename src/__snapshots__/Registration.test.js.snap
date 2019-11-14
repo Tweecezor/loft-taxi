@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Registration Snapshot 1`] = `
+<div
+  className="reg"
+>
+  <div
+    className="reg__caption-wrap"
+  >
+    <h2
+      className="reg__caption"
+    >
+      Регистрация
+    </h2>
+  </div>
+  <div
+    className="reg__question"
+  >
+    <span
+      className="reg__question-text"
+    >
+      Уже зарегистрирован?
+    </span>
+    <a
+      className="reg__question-link"
+      href="#"
+      onClick={[Function]}
+    >
+      Войти
+    </a>
+  </div>
+  <form
+    action=""
+    className="reg__form"
+  >
+    <div
+      className="reg__form-wrap reg__form-wrap--email"
+    >
+      <label
+        htmlFor="email"
+      >
+        Адресс электронной почты
+      </label>
+      <input
+        className="reg__form-input"
+        id="email"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="reg__form-wrap reg__form-wrap--name"
+    >
+      <label
+        htmlFor="name"
+      >
+        Имя
+      </label>
+      <input
+        className="reg__form-input"
+        id="name"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="reg__form-wrap reg__form-wrap--surename"
+    >
+      <label
+        htmlFor="surename"
+      >
+        Фамилия
+      </label>
+      <input
+        className="reg__form-input"
+        id="surename"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="reg__form-wrap reg__form-wrap--password"
+    >
+      <label
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="reg__form-input"
+        id="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <input
+      className="reg__form-submit"
+      type="submit"
+      value="Зарегистрироваться"
+    />
+  </form>
+</div>
+`;
