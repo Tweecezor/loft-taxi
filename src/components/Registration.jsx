@@ -1,19 +1,18 @@
 import React,{useState} from 'react';
 import '../styles/Registration.css';
 import PropTypes from 'prop-types';
+import {Link,Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import {userRegistration,sendRegistrationRequest} from '../Actions/actions'
 
 // class Registration extends React.Component{
-const Registration = ({setBlock}) => {
+const RegistrationComponent = (props) => {
 
     var[name,setName] = useState('');
-    var[surename,setSurename] = useState('');
+    var[surname,setSurname] = useState('');
     var[password,setPassword] = useState('');
     var[email,setEmail] = useState('');
 
-    const handleOpenLogin = (e) => {
-        e.preventDefault();
-        setBlock('login')
-    }
 
     const handleInputPassword = (e) => {
         setPassword(password = e.target.value);
@@ -22,13 +21,18 @@ const Registration = ({setBlock}) => {
         setName(name = e.target.value);
     }
     const handleInputSurename = (e) => {
-        setSurename(surename = e.target.value);
+        setSurname(surname = e.target.value);
     }
     const handleInputemail = (e) => {
         setEmail(email = e.target.value);
     }
 
-    
+    const showAll = (e)=>{
+        e.preventDefault();
+        // props.registration(email,name,surename,password);
+        props.regOnServer(email,password,name,surname);
+    }
+
         return (
             <div className = 'reg'>
                 <div className = 'reg__caption-wrap'>
@@ -36,9 +40,9 @@ const Registration = ({setBlock}) => {
                 </div>
                 <div className = 'reg__question'>
                     <span className = 'reg__question-text'>Уже зарегистрирован?</span>
-                    <a href="#" className = 'reg__question-link' onClick = {handleOpenLogin}>Войти</a>
+                    <Link to = {'/login'}>Войти</Link>
                 </div>
-                <form action="" className = 'reg__form' >
+                <form action="" className = 'reg__form' onSubmit = {showAll}>
                     <div className = 'reg__form-wrap reg__form-wrap--email'> 
                         <label htmlFor="email">Адресс электронной почты</label>
                         <input type="email" className = 'reg__form-input' id = 'email' value = {email} onChange = {handleInputemail} />
@@ -49,19 +53,38 @@ const Registration = ({setBlock}) => {
                     </div>
                     <div className = 'reg__form-wrap reg__form-wrap--surename'>
                         <label htmlFor="surename">Фамилия</label>
-                        <input type="text" className = 'reg__form-input' id='surename' value = {surename} onChange = {handleInputSurename}/>
+                        <input type="text" className = 'reg__form-input' id='surename' value = {surname} onChange = {handleInputSurename}/>
                     </div>
                     <div className = 'reg__form-wrap reg__form-wrap--password'> 
                         <label htmlFor="password">Пароль</label>
                         <input type="password" className = 'reg__form-input' id = 'password' value = {password} onChange = {handleInputPassword} />
                     </div>
-                    <input type="submit" value = 'Зарегистрироваться' className = 'reg__form-submit'/>
+                    <input type="submit" value = 'Зарегистрироваться' className = 'reg__form-submit' />
                 </form>
             </div>
         )
 }
-Registration.propTypes = {
+RegistrationComponent.propTypes = {
     setBlock: PropTypes.func
 }
+const mapStateToProps = (state) => {
+    console.log(state.RegistrationReducer);
+    return({})
+}
 
-export default Registration;
+const mapDispatchToProps = (dispatch) => {
+    console.log(dispatch)
+    return ({
+        // registration : (email,name,surename,password)=> {
+        //     dispatch(userRegistration(email,name,surename,password));
+        // },
+        regOnServer : (email,password,name,surname)=> {
+            dispatch(sendRegistrationRequest({email,password,name,surname}))
+        }
+    })
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegistrationComponent);

@@ -1,76 +1,43 @@
 import React,{useState} from 'react';
-
 import './App.css';
 import Header from './components/Header';
-
-import Map from './components/Map';
-
-import Profile from './components/Profile';
 import Background from './components/Background';
+import {Link,Route,Switch,Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import myContext from '../src/context' ;
+function App (props) {
 
+    var {isLoggedIn} = props;
+    console.log(isLoggedIn);
 
-var currentBlock = 'login';
-const {Provider,Consumer} = myContext;
-
-
-
-
-
-
-const PAGES = {
-    map : () => (    
-        <Map />
-        ) ,
-    profile : () => (
-        <section className = 'background'>
-            <Profile />
-        </section>
-    ),
-    // welcome : (setPage) => (
-       
-    //         <Background setPageProp = {setPage} />
-      
-    // )
+    if(isLoggedIn) {
+        return (
+            <div className = 'root-wrapper'>
+                <Header  />
+                <Redirect to ={'/map'} />
+            </div>
+        )
+    }
+    else if (!isLoggedIn) {
+        return (
+            <Background/>
+        )
+    }
 }
 
-function App() {
-
-    const login = (email, password) => {
-        if (email === 'test' && password === '123') {
-            setIsLoggedIn(true)
-            // setPage('profile')
-        }
-    }
-    const logout = () => {
-        setIsLoggedIn(false)
-        // setPage('login')
-    }
-   
-    const [isLoggedIn,setIsLoggedIn] = React.useState(false);
-    const [page,setPage] = React.useState('map');
-    return (
-        <Provider value = { {isLoggedIn,setIsLoggedIn,login,logout}  }>
-            {isLoggedIn &&(
-                 <div className = 'root-wrapper'>
-                    <Header setPageProp = {setPage} />
-                    {PAGES[page](setPage)}
-                </div>
-            )}
-            {!isLoggedIn && (
-                <Background setPageProp = {setPage} />
-            )}
-          
-           
-           
-        </Provider>
-    );
-
-
+const mapStateToProps = (state) => {
+    return({
+        isLoggedIn:state.LoginReducer.isLoggedIn
+    })
+}
+const mapDispatchToProps = (dispatch) => {
+   return ({})
 }
 
-export default App;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
 
 
 
