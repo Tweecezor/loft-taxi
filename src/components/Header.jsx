@@ -1,7 +1,6 @@
 import React,{useContext} from 'react';
 import PropTypes from 'prop-types'
 import '../styles/Header.css';
-import myContext from '../context'
 import { Link, Route, Switch } from 'react-router-dom';
 import Map from '../components/Map';
 import Profile from '../components/Profile';
@@ -45,10 +44,6 @@ const HeaderComponent = (props) =>{
                     </nav>
                 </header>
             </div>
-            <Switch>
-                <Route path="/map" component={Map} exact />
-                <Route path="/profile" component={Profile} />
-            </Switch>
         </div>
 
        
