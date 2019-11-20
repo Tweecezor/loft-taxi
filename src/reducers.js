@@ -1,8 +1,13 @@
 import {combineReducers} from 'redux';
+import {createSelector} from 'reselect';
 
-import {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,getCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC} from './Actions/actions'
-import {LOGIN_USER,LOGOUT_USER} from './Actions/actions'
-import {ISLOGGED} from './Actions/actions'
+import allActions from './Actions/indexActions';
+// import {LOGIN_USER,LOGOUT_USER} from './Actions/actions'
+// import {ISLOGGED} from './Actions/actions'
+
+const {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,
+    getCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,
+    changeCardCVC,LOGIN_USER,LOGOUT_USER,ISLOGGED} = allActions;
 
 const initLoggedState = {
   
@@ -26,7 +31,7 @@ const initProfileDataState = {
     cardCVC:'',
 }
 
-const LoginReducer = ( state = initUser, action ) => {
+export const LoginReducer = ( state = initUser, action ) => {
     switch(action.type) {
         case LOGIN_USER :
             return {
@@ -65,7 +70,7 @@ const RegistrationReducer = (state = initRegistrationUserState, action) => {
             return state
     }
 }
-const ProfileReducer = (state = initProfileDataState ,action) => {
+export const ProfileReducer = (state = initProfileDataState ,action) => {
     switch(action.type) {
         case changeCardNumber.toString():
             return {
@@ -120,3 +125,10 @@ const rootReducer = combineReducers({
 })
 
 export default rootReducer;
+
+export const getIsLoggedIn = createSelector(state=>state.LoginReducer.isLoggedIn,
+    isLoggedIn => isLoggedIn
+    )
+ 
+export const getCardsData = state => state.ProfileReducer
+export const getUserToken = state => state.LoginReducer.userToken;

@@ -2,13 +2,12 @@ import {createStore,applyMiddleware,compose} from 'redux';
 import rootReducer from './reducers'
 import {registrationMiddleware,profileMiddleware} from './middlewares'
 
-
+const middlewares = [registrationMiddleware,profileMiddleware];
 const createAppStore = () => {
     const store = createStore(
         rootReducer,
         compose(
-            applyMiddleware(registrationMiddleware),
-            applyMiddleware(profileMiddleware),
+            applyMiddleware(...middlewares),
             window.__REDUX_DEVTOOLS_EXTENSION__
             ? window.__REDUX_DEVTOOLS_EXTENSION__()
             : noop => noop,

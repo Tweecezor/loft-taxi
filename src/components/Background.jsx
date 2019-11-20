@@ -5,22 +5,22 @@ import '../styles/Background.css'
 import PropTypes from 'prop-types';
 import { Link, Route, Switch,Redirect } from 'react-router-dom';
 
-import myContext from '../context' ;
 
-const {Provider,Consumer} = myContext;
+
+
 
 const Background = ({setPageProp}) => {
 
-    const [currentBlock,setCurrentBlock] = useState('login');
-    const BLOCK = {
-        login: (setCurrentBlock) => (
-                <Login setBlock = {setCurrentBlock} setPage = {setPageProp}></Login>
-            ),
-        reg: (setCurrentBlock) => (
-            <RegistrationComponent setBlock = {setCurrentBlock} />
-            ),
-    }
-    const context = useContext(myContext);
+    // const [currentBlock,setCurrentBlock] = useState('login');
+    // const BLOCK = {
+    //     login: (setCurrentBlock) => (
+    //             <Login setBlock = {setCurrentBlock} setPage = {setPageProp}></Login>
+    //         ),
+    //     reg: (setCurrentBlock) => (
+    //         <RegistrationComponent setBlock = {setCurrentBlock} />
+    //         ),
+    // }
+
     return (
         <section className = 'background'>
             <div>
