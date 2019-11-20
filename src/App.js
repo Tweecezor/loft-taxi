@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Login from './components/LogIn';
 import RegistrationComponent from './components/Registration';
 import Map from './components/Map';
+import { getIsLoggedIn } from './reducers'
 
 function App (props) {
    
@@ -42,7 +43,7 @@ function App (props) {
 
 const mapStateToProps = (state) => {
     return({
-        isLoggedIn:state.LoginReducer.isLoggedIn
+        isLoggedIn:getIsLoggedIn(state)
     })
 }
 const mapDispatchToProps = (dispatch) => {

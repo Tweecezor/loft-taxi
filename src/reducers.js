@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {createSelector} from 'reselect';
 
 import allActions from './Actions/indexActions';
 // import {LOGIN_USER,LOGOUT_USER} from './Actions/actions'
@@ -124,3 +125,10 @@ const rootReducer = combineReducers({
 })
 
 export default rootReducer;
+
+export const getIsLoggedIn = createSelector(state=>state.LoginReducer.isLoggedIn,
+    isLoggedIn => isLoggedIn
+    )
+ 
+export const getCardsData = state => state.ProfileReducer
+export const getUserToken = state => state.LoginReducer.userToken;

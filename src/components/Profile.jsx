@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import '../styles/Profile.css';
 import { connect } from 'react-redux';
 import { sendProfileDataRequest,getProfileDataRequest,getCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC } from '../Actions/actions'
+import {getCardsData,getUserToken} from '../reducers';
 
 var styles = {
     background:'white',
@@ -13,6 +14,7 @@ var styles = {
 const Profile = (props) => {
 
     var flag = 1;
+    console.log(props.isLoading);
 
     useEffect(()=>{
         console.log(props)
@@ -87,8 +89,8 @@ const Profile = (props) => {
 }
 const mapStateToProps = (state) => {
     return({
-        cardsData:state.ProfileReducer,
-        userToken:state.LoginReducer.userToken,
+        cardsData:getCardsData(state),
+        userToken:getUserToken(state),
         isLoading:state.ProfileReducer.isLoading
     })
 }

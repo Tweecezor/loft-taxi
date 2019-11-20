@@ -68,7 +68,6 @@ RegistrationComponent.propTypes = {
     setBlock: PropTypes.func
 }
 const mapStateToProps = (state) => {
-    console.log(state.RegistrationReducer);
     return({})
 }
 

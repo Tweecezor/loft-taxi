@@ -6,6 +6,7 @@ import Map from '../components/Map';
 import Profile from '../components/Profile';
 import {LogoutAction,getProfileDataRequest} from '../Actions/actions';
 import { connect } from 'react-redux';
+import {getUserToken} from '../reducers'
 
 
 const HeaderComponent = (props) =>{
@@ -56,7 +57,7 @@ HeaderComponent.propTypes = {
 
 const mapStateToProps = (state) => {
     return({
-        userToken:state.LoginReducer.userToken
+        userToken:getUserToken(state)
     })
 }
 const mapDispatchToProps = (dispatch) => {
