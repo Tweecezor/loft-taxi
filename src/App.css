@@ -70,6 +70,34 @@ input{
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+.bigTEXT{
+    width:100px;
+    height: 200px;
+    background:white;
+    border:2px solid black;
+    z-index: 20;
+}
+.warninng-block{
+    position: absolute;
+    top:25%;
+    left:10%;
+    background: #fff;
+    padding:40px 40px;
+    z-index: 10;
+    width:350px;
+}
+.link-btn{
+    padding: 15px 20px;
+    background-color: #ffc617;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: none;
+    margin-bottom: 0;
+}
+.warning_header{
+    margin-bottom: 20px;
+}
 /* .registration__logo{
     margin-right: 50px;
 } */

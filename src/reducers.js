@@ -6,12 +6,15 @@ import allActions from './Actions/indexActions';
 // import {ISLOGGED} from './Actions/actions'
 
 const {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,
-    getCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,
-    changeCardCVC,LOGIN_USER,LOGOUT_USER,ISLOGGED} = allActions;
+    fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,
+    changeCardCVC,LOGOUT_USER,LogginAction,isLogged,setProfileDataRequest,
+    fetchAddressesList,setAddressesList,setOrderCoords,fetchOrderAddresses,
+    LogoutAction,setNewOrder
+} = allActions;
 
-const initLoggedState = {
+// const initLoggedState = {
   
-}
+// }
 const initUser = {
     email:'',
     password:'',
@@ -30,22 +33,52 @@ const initProfileDataState = {
     cardOwner:'',
     cardCVC:'',
 }
+const initAddressesState = {
+    addresses:[]
+}
+const initOrderCoords = {
+    coords:'',
+    newOrder:false
+};
+
+export const OrderCoordsReducer = (state = initOrderCoords,action) => {
+    switch (action.type) {
+        case fetchOrderAddresses.toString() :
+            return {
+                ...state
+            }
+        case setOrderCoords.toString() :
+            console.log(action.payload);
+            return {
+                ...state,
+                coords:action.payload
+            }
+        case setNewOrder.toString():
+            return {
+                ...state,
+                newOrder:action.payload.newOrder,
+                coords:''
+            }
+        default:
+            return {
+                ...state
+            }
+    }
+}
 
 export const LoginReducer = ( state = initUser, action ) => {
     switch(action.type) {
-        case LOGIN_USER :
+        case LogginAction.toString() :
             return {
-                ...state,
-                email:action.payload.email,
-                password:action.payload.password
+                ...state
             }
-        case ISLOGGED : 
+        case isLogged.toString() : 
             return {
                 ...state,
                 isLoggedIn: action.payload.isLoggedIn,
                 userToken: action.payload.userToken
             }
-        case LOGOUT_USER :
+        case LogoutAction.toString() :
             return {
                 ...state,
                 isLoggedIn : action.payload.isLoggedIn,
@@ -92,13 +125,17 @@ export const ProfileReducer = (state = initProfileDataState ,action) => {
                 ...state,
                 cardCVC:action.payload.cardCVC
             }
-        case sendProfileDataRequest.toString():
+        case setProfileDataRequest.toString():
             return {
                 ...state,
                 cardNumber:action.payload.cardNumber,
                 cardData:action.payload.expiryDate,
                 cardOwner:action.payload.cardName,
                 cardCVC:action.payload.cvc
+            }
+        case sendProfileDataRequest.toString():
+            return {
+                ...state,
             }
         case getProfileDataRequest.toString():
             return {
@@ -108,7 +145,7 @@ export const ProfileReducer = (state = initProfileDataState ,action) => {
                 cardOwner:action.payload.cardName,
                 cardCVC:action.payload.cvc
             }
-        case getCardDataRequest.toString() :
+        case fetchCardDataRequest.toString() :
             return {
                 ...state
             }
@@ -116,12 +153,31 @@ export const ProfileReducer = (state = initProfileDataState ,action) => {
             return state
     }
 }
+export const AddressesReducer = (state = initAddressesState,action) => {
+    switch(action.type){
+        case fetchAddressesList.toString():
+            return {
+                ...state
+            }
+        case setAddressesList.toString():
+            return {
+            ...state,
+            addresses:action.payload.addresses
+        }
+        default:
+            return {
+                ...state
+            }
+    }
+}
 
 
 const rootReducer = combineReducers({
     LoginReducer,
     RegistrationReducer,
-    ProfileReducer
+    ProfileReducer,
+    AddressesReducer,
+    OrderCoordsReducer
 })
 
 export default rootReducer;
@@ -132,3 +188,4 @@ export const getIsLoggedIn = createSelector(state=>state.LoginReducer.isLoggedIn
  
 export const getCardsData = state => state.ProfileReducer
 export const getUserToken = state => state.LoginReducer.userToken;
+export const getAddressesList = state => state.AddressesReducer.addresses

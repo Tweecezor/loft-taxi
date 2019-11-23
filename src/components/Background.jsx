@@ -1,9 +1,9 @@
-import React,{useState, useContext} from 'react';
+import React from 'react';
 import RegistrationComponent from './Registration';
 import Login from './LogIn';
 import '../styles/Background.css'
 import PropTypes from 'prop-types';
-import { Link, Route, Switch,Redirect } from 'react-router-dom';
+import {  Route, Switch,Redirect } from 'react-router-dom';
 
 
 

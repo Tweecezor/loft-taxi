@@ -3,13 +3,50 @@
     top:25%;
     left:10%;
     background: #fff;
-    padding:30px;
+    padding:40px 40px;
     z-index: 10;
+    width:350px;
+}
+.order__caption{
+    margin-bottom: 20px;
 }
 .order__menu-wrap{
     display: flex;
     flex-direction: column;
 }
+.addressInput{
+    width:100%;
+}
 .order__menu-direction{
-    
+    margin-bottom: 20px;
+}
+.order__button{
+    padding: 15px 20px;
+    background-color: #ffc617;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: none;
+    margin-bottom: 0;
+}
+.order__menu{
+    border:none;
+    background:transparent;
+    border-bottom: 1px solid black;
+}
+.drop-menu{
+    padding: 5px 0px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.drop-menu__item:hover{
+    background: lightgrey;
+}
+.order__header{
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.order__text{
+    margin-bottom: 30px;
+    font-size: 20px;
 }

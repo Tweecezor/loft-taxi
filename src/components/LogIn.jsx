@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Login.css';
-import {Link,Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import {LogginAction,getProfileDataRequest,getCardDataRequest} from '../Actions/actions';
+import {LogginAction} from '../Actions/actions';
 import { connect } from 'react-redux';
 
 const Login = props => {

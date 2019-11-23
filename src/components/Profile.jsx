@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import '../styles/Profile.css';
 import { connect } from 'react-redux';
-import { sendProfileDataRequest,getProfileDataRequest,getCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC } from '../Actions/actions'
+import { sendProfileDataRequest,getProfileDataRequest,fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC } from '../Actions/actions'
 import {getCardsData,getUserToken} from '../reducers';
 
 var styles = {
@@ -14,12 +14,13 @@ var styles = {
 const Profile = (props) => {
 
     var flag = 1;
-    console.log(props.isLoading);
+
 
     useEffect(()=>{
-        console.log(props)
+        console.log('in use effect');
        props.getCardData(props.userToken);
     },[flag]);
+
     //var
     // var [cardNumber,setCardNumber] = React.useState(props.cardsData.cardNumber);
     // var [cardData,setCardData] = React.useState(props.cardsData.cardData);
@@ -46,7 +47,15 @@ const Profile = (props) => {
     const onSubmitForm = (e) => {
         e.preventDefault();
         console.log(props.cardsData);
-        props.addCardsData(props.cardsData,props.userToken)
+        console.log('safdsgdht');
+        props.addCardsData({
+            cardNumber:props.cardsData.cardNumber,
+            expiryDate:props.cardsData.cardData,
+            cardName:props.cardsData.cardOwner,
+            cvc:props.cardsData.cardCVC
+        },props.userToken)
+        //console.log('{ "cardNumber": "2000 0000 0000 0000", "expiryDate": "01/22", "cardName": "TEST", "cvc": "910", "token": "AUTH_TOKEN" }')
+
     }
 
 
@@ -103,7 +112,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         getCardData : (userToken)=>{
             // debugger;
-            dispatch(getCardDataRequest({userToken}))
+            dispatch(fetchCardDataRequest({userToken}))
         },
         setCardNumber : (cardNumber)=>{
             dispatch(changeCardNumber({cardNumber}))

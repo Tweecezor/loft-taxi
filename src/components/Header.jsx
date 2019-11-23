@@ -33,7 +33,7 @@ const HeaderComponent = (props) =>{
                     <nav className = 'nav nav--header'>
                         <ul className = 'nav__list'>
                             <li className="nav__item active">
-                                <Link to={`/map`} className = 'nav__link'>Карта</Link>{' '}  
+                                <Link to={`/map`} className = 'nav__link'>Карта</Link>
                             </li>
                             <li className="nav__item" >
                                 <Link to={`/profile`} className = 'nav__link' onClick = {onClickProfile}>Профиль</Link>{' '} 
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         userLogout : ()=> {
-            dispatch(LogoutAction());
+            dispatch(LogoutAction({isLoggedIn:false}));
         },
         // getCardData : (userToken)=>{ 
         //     dispatch(getProfileDataRequest({userToken}))

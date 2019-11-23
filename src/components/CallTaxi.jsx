@@ -1,30 +1,178 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import '../styles/CallTaxi.css';
+import {connect} from 'react-redux'
+import {fetchAddressesList,fetchOrderAddresses,setNewOrder} from '../Actions/actions';
+import {getAddressesList} from '../reducers';
 
-const orderComponent = () =>(
-    <div className = 'order'>
-        <h2 className = 'order__caption'>Вызов такси</h2>
-        <div className = 'order__menu-wrap'>
-            <div className = 'order__menu-direction'>
-                <input type="text"/>
-                <select name="place" id="" className = 'order__menu'>
-                    <option value="1" className="order__place">Пушкинска</option>
-                    <option value="2" className="order__place">Васильевская</option>
-                    <option value="3" className="order__place">Дмитровская</option>
-                </select>
+
+
+const OrderComponent = (props) =>{
+    console.log(props);
+    var flag;
+
+    useEffect(()=>{
+        console.log(props.addressesList);
+        props.getAddresses();
+    },[flag]);
+
+    var [addressFrom,setAddressFrom] = React.useState();
+   
+    var [addressTo,setAddressTo] = React.useState();
+    
+    var [addresses,setAddresses] = React.useState(props.addressesList);
+
+    var [orderStatus,setOrderStatus] = React.useState(false);
+
+    const [switcherFrom,setSwitcherFrom] = useState(false);
+    const [switcherTo,setSwitcherTo] = useState(false);
+
+
+    const onInputClicked = (e) => {
+        if (e.target.dataset.input === 'to'){
+            setSwitcherTo(true);
+            console.log(addressFrom);
+            setAddresses(filterAddress(props.addressesList,addressFrom))
+        } else
+        if (e.target.dataset.input === 'from'){
+            setSwitcherFrom(true);
+            console.log(addressTo);
+            setAddresses(filterAddress(props.addressesList,addressTo));
+            console.log(addresses);
+        } 
+        else {
+            setSwitcherFrom(false);
+            setSwitcherTo(false);
+        }
+    }
+
+    const onInputChange = (e)=>{
+        if (e.target.dataset.input === 'to'){
+            setAddressTo(e.target.value);
+            setAddresses( props.addressesList.filter((address)=>isMatching(address,e.target.value)))
+        } else
+        if (e.target.dataset.input === 'from'){
+            setAddressFrom(e.target.value);
+            setAddresses( props.addressesList.filter((address)=>isMatching(address,e.target.value)))
+        } 
+
+    }
+
+    function isMatching(full,chunk){
+ 
+        if (full.toLowerCase().indexOf(chunk.toLowerCase()) !== -1) {
+
+            return true;
+        } else if (full.toLowerCase().indexOf(chunk.toLowerCase()) === -1) {
+
+            return false;
+        }
+    }
+
+    function filterAddress(addresses,choosenAddress){
+        return addresses.filter((address)=> address === choosenAddress ? false : true)
+    }
+
+    const choosenAddress = (e) => {
+        if (e.target.dataset.direction === 'to'){
+            setAddressTo(e.target.innerText)
+            setSwitcherTo(false);
+            
+        } 
+        if (e.target.dataset.direction === 'from'){
+            setAddressFrom(e.target.innerText)
+            setSwitcherFrom(false);
+            
+        } 
+    }
+
+    const submitOrder = () => {
+        props.setCoord({
+            to:addressTo,
+            from:addressFrom
+        })
+        setOrderStatus(true);
+        props.setNewOrderStatus(false);
+    }
+    const submitNewOrder = () => {
+        props.setNewOrderStatus(true);
+        setOrderStatus(false);
+    }
+    
+    if(!orderStatus){
+        return(
+            <div className = 'order' onClick={onInputClicked}>
+                <div className = 'order__menu-wrap'>
+                    <div className = 'order__menu-direction'>
+                        <label htmlFor="from">
+                            <input data-input='from' autoComplete="off" value={addressFrom}  onChange={onInputChange} className = "addressInput" type="text" placeholder = "Откуда" id ="from"/>
+                        </label>
+                        {
+                            switcherFrom === true &&
+                            addresses.map((address,index) => 
+                                <div className='drop-menu__item' data-direction='from' key={index} onClick={choosenAddress}>
+                                    {address}
+                                </div>
+                            )
+                        
+                        }
+                    
+                    
+                    </div>
+                    <div className = 'order__menu-direction'>
+                        <label htmlFor="where">
+                            <input data-input='to' value={addressTo} onChange={onInputChange}   className = "addressInput" type="text" placeholder = "Куда" id = "where"/>
+                        </label>
+                    
+                        {
+                            switcherTo === true &&
+                            addresses.map((address,index) => 
+                                <div className='drop-menu__item' data-direction='to' key={index} onClick={choosenAddress}>
+                                    {address}
+                                </div>
+                            )
+                        }
+                    
+                    </div>
+                    <input onClick={submitOrder} type="button" value="Вызвать такси" className = "order__button"/>
+                </div>
             </div>
-            <div className = 'order__menu-direction'>
-                <input type="text"/>
-                <select name="place" id="" className = 'order__menu'>
-                    <option value="4" className="order__place">Бибирево</option>
-                    <option value="5" className="order__place">Алешкино</option>
-                    <option value="6" className="order__place">ЕЛисеево</option>
-                </select>
+        )
+    } else if(orderStatus){
+        return (
+            <div className = 'order'>
+                <h2 className="order__header">Заказ размещён</h2>
+                <p className="order__text">
+                Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.
+                </p>
+                <input onClick={submitNewOrder}  type="button" value="Сделать еще один заказ" className = "order__button"/>
             </div>
-        </div>
-    </div>
+        )
+    }
+}
 
-);
 
-export default orderComponent; 
+const mapStateToProps = state => {
+    return({
+        addressesList:getAddressesList(state)
+    })
+}
+const mapDispatchToProps = (dispatch) => {
+    console.log(dispatch)
+    return ({
+        getAddresses: () => {
+            dispatch(fetchAddressesList())
+        },
+        setCoord:(direction) => {
+            dispatch(fetchOrderAddresses(direction))
+        },
+        setNewOrderStatus:(bool)=>{
+            dispatch(setNewOrder({newOrder:bool}))
+        }
+    })
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(OrderComponent);
 
