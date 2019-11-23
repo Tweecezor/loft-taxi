@@ -4,8 +4,9 @@ import mapboxgl from 'mapbox-gl';
 import CallTaxi from './CallTaxi';
 import {connect} from 'react-redux'
 import {getAddressesList} from '../reducers';
-import {fetchAddressesList} from '../Actions/actions';
+import {fetchAddressesList,fetchCardDataRequest} from '../Actions/actions';
 import { Link } from 'react-router-dom';
+import {getUserToken} from '../reducers';
 
 
 
@@ -17,6 +18,7 @@ class Map extends React.Component {
         console.log(props.cardData.cardNumber === '');
     }
     componentDidMount(){
+        this.props.getCardData(this.props.userToken);
         mapboxgl.accessToken = 'pk.eyJ1IjoidHdlZWN6IiwiYSI6ImNrMjRtaHIxYjBnemYzbXJ3aWViNXdrNjEifQ.76mRux1cIMwrvLuGh6f3Gw';
         
         this.map = new mapboxgl.Map({
@@ -33,6 +35,7 @@ class Map extends React.Component {
         if(this.props.coords.length) {
             this.draw(this.map,this.props.coords);
         }
+        console.log(this.props)
         if(this.props.newOrder) {
             if (this.map.getLayer('route')) {
                 this.map.removeLayer('route'); this.map.removeSource('route');
@@ -216,7 +219,9 @@ const mapStateToProps = state => {
     return({
         // addressesList:getAddressesList(state)
         coords:state.OrderCoordsReducer.coords,
-        cardData:state.ProfileReducer
+        cardData:state.ProfileReducer,
+        userToken:getUserToken(state),
+        newOrder:state.OrderCoordsReducer.newOrder
         // cardData:state.ProfileReducer
         // allCoord:getCoord(state)
     })
@@ -227,7 +232,11 @@ const mapDispatchToProps = (dispatch) => {
     return ({
         getAddresses: () => {
             dispatch(fetchAddressesList())
-        }
+        },
+        getCardData : (userToken)=>{
+            // debugger;
+            dispatch(fetchCardDataRequest({userToken}))
+        },
     })
 }
 

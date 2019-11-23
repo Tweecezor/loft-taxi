@@ -30,14 +30,13 @@ const OrderComponent = (props) =>{
     const onInputClicked = (e) => {
         if (e.target.dataset.input === 'to'){
             setSwitcherTo(true);
-            console.log(addressFrom);
             setAddresses(filterAddress(props.addressesList,addressFrom))
+            setSwitcherFrom(false);
         } else
         if (e.target.dataset.input === 'from'){
             setSwitcherFrom(true);
-            console.log(addressTo);
             setAddresses(filterAddress(props.addressesList,addressTo));
-            console.log(addresses);
+            setSwitcherTo(false);
         } 
         else {
             setSwitcherFrom(false);
@@ -120,7 +119,7 @@ const OrderComponent = (props) =>{
                     </div>
                     <div className = 'order__menu-direction'>
                         <label htmlFor="where">
-                            <input data-input='to' value={addressTo} onChange={onInputChange}   className = "addressInput" type="text" placeholder = "Куда" id = "where"/>
+                            <input data-input='to' autoComplete="off" value={addressTo} onChange={onInputChange}   className = "addressInput" type="text" placeholder = "Куда" id = "where"/>
                         </label>
                     
                         {
