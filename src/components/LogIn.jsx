@@ -25,14 +25,6 @@ const Login = props => {
        
     }
 
-    // const onClickLoginButton = (e) => {
-    //     e.preventDefault();
-    //     // console.log(LogginAction());
-    //     // debugger;
-        
-    // }
-
-
     return(
         <div className = 'login'>
             <div className = 'login__caption-wrap'>
@@ -71,10 +63,7 @@ const mapDispatchToProps = (dispatch) => {
     return ({
         userLogin : (email,password)=> {
             dispatch(LogginAction({email,password}));
-        },
-        // getCardData : ()=>{
-        //     dispatch(getCardDataRequest({}))
-        // }
+        }
     })
 }
 

@@ -7,7 +7,7 @@ import allActions from './Actions/indexActions';
 
 const {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,
     fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,
-    changeCardCVC,LOGOUT_USER,LogginAction,isLogged,setProfileDataRequest,
+    changeCardCVC,LogginAction,isLogged,setProfileDataRequest,
     fetchAddressesList,setAddressesList,setOrderCoords,fetchOrderAddresses,
     LogoutAction,setNewOrder
 } = allActions;
@@ -89,7 +89,7 @@ export const LoginReducer = ( state = initUser, action ) => {
     }   
 }
 
-const RegistrationReducer = (state = initRegistrationUserState, action) => {
+export const RegistrationReducer = (state = initRegistrationUserState, action) => {
     switch(action.type) {
         case sendRegistrationRequest.toString() :
             return {
@@ -97,7 +97,7 @@ const RegistrationReducer = (state = initRegistrationUserState, action) => {
                 email: action.payload.email,
                 password: action.payload.password,
                 name: action.payload.name,
-                surname: action.payload.surename,
+                surname: action.payload.surname,
             }
         default:
             return state

@@ -144,6 +144,7 @@ function* getOrderCoords(){
     yield takeEvery(fetchOrderAddresses,function*(action){
         try{
             const result = yield call(getCoords,action.payload);
+            console.log(result);
             yield put(setOrderCoords(result));
             const state =  yield select(state=>state);
             console.log(state);

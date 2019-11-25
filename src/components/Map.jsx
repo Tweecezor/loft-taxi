@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import CallTaxi from './CallTaxi';
 import {connect} from 'react-redux'
 import {getAddressesList} from '../reducers';
-import {fetchAddressesList,fetchCardDataRequest} from '../Actions/actions';
+import {fetchAddressesList,fetchCardDataRequest,setOrderCoords} from '../Actions/actions';
 import { Link } from 'react-router-dom';
 import {getUserToken} from '../reducers';
 
@@ -32,6 +32,7 @@ class Map extends React.Component {
     }
 
     componentDidUpdate(){
+        this.map.on('load',()=>{})
         if(this.props.coords.length) {
             this.draw(this.map,this.props.coords);
         }
@@ -41,6 +42,10 @@ class Map extends React.Component {
                 this.map.removeLayer('route'); this.map.removeSource('route');
             }
         }
+    }
+
+    componentWillUnmount(){
+        this.props.resetCoord();
     }
     
     draw = (map,coord)=>{
@@ -237,6 +242,9 @@ const mapDispatchToProps = (dispatch) => {
             // debugger;
             dispatch(fetchCardDataRequest({userToken}))
         },
+        resetCoord : ()=>{
+            dispatch(setOrderCoords({coords:''}))
+        }
     })
 }
 
