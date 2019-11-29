@@ -184,9 +184,6 @@ const mapDispatchToProps = (dispatch) => {
 
     return ({
         addCardsData : (cardsData,token)=> {
-            console.log('worked');
-            console.log(cardsData)
-            console.log(token);
             dispatch(sendProfileDataRequest({...cardsData,token}));
         },
         getCardData : (userToken)=>{

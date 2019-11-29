@@ -30,6 +30,7 @@ class Map extends React.Component {
     }
 
     componentDidUpdate(){
+        
         this.map.on('load',()=>{})
         if(this.props.coords.length) {
             this.draw(this.map,this.props.coords);
@@ -83,11 +84,11 @@ class Map extends React.Component {
             <>
                 <div ref = {this.addMap} className = 'map'>
                     <div className = 'container'>
-                        {this.props.cardData.cardNumber !== '' &&  <CallTaxi />}
-                        {this.props.cardData.cardNumber === '' &&  
-                            <div className="warninng-block">
+                        {this.props.cardData.cardNumber !== undefined &&  <CallTaxi />}
+                        {this.props.cardData.cardNumber === undefined &&  
+                            <div className="warninng-block" style={{textAlign:'center'}}>
                                 <h2 className = "warning_header">Заполните данные кредитной карты</h2>
-                                <Link to={`/profile`} className = 'link-btn'>Перейти</Link>
+                                <Link to={`/profile`} style={{color:'black'}} className = 'link-btn'>Перейти</Link>
                             </div>
                         }
                     </div>
@@ -99,15 +100,12 @@ class Map extends React.Component {
 }
 // const Map = (props) => {
   
-//     console.log(props);
-//     var flag = 1;
+//     flag = 1;
 //     var map;
 //    const [divMap,setDivMap] = useState();
  
 //     useEffect(()=>{
-//         console.log(divMap);
-//         console.log('in use effect');
-//         mapboxgl.accessToken = 'pk.eyJ1IjoidHdlZWN6IiwiYSI6ImNrMjRtaHIxYjBnemYzbXJ3aWViNXdrNjEifQ.76mRux1cIMwrvLuGh6f3Gw';
+//                 mapboxgl.accessToken = 'pk.eyJ1IjoidHdlZWN6IiwiYSI6ImNrMjRtaHIxYjBnemYzbXJ3aWViNXdrNjEifQ.76mRux1cIMwrvLuGh6f3Gw';
         
 //         map = new mapboxgl.Map({
 //             container: document.querySelector('.map'),
@@ -152,19 +150,11 @@ class Map extends React.Component {
 //     //     fetch(`https://loft-taxi.glitch.me/route?address1=Шаверма на Невском&address2=Пулково (LED)`).
 //     //     then(response=>response.json())
 //     //     .then(result=>{
-//     //       console.log(result);
-//     //     })
+//     //         })
 //     // }
 //     var addresses = props.addressesList;
-//     // console.log(addresses);
-
-
-// const draw = (map)=>{
-//     // console.log('efwAGRHT');
-//     // console.log(map);
-//     console.log('sdafghjkhl');
-//     console.log(coord)
-//         map.flyTo({
+//     // t draw = (map)=>{
+//     // /  .flyTo({
 //             center: coord[0],
 //              zoom: 15 });
 //             //  map.addLayer({
@@ -231,8 +221,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log(dispatch)
-    return ({
+        return({
         getAddresses: () => {
             dispatch(fetchAddressesList())
         },

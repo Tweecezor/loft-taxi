@@ -3,15 +3,16 @@ import '../styles/CallTaxi.css';
 import {connect} from 'react-redux'
 import {fetchAddressesList,fetchOrderAddresses,setNewOrder} from '../Actions/actions';
 import {getAddressesList} from '../reducers';
+import {getCardsData,getUserToken} from '../reducers';
 
 
 
 const OrderComponent = (props) =>{
-    console.log(props);
+   
+
     var flag;
 
     useEffect(()=>{
-        console.log(props.addressesList);
         props.getAddresses();
     },[flag]);
 
@@ -152,11 +153,13 @@ const OrderComponent = (props) =>{
 
 const mapStateToProps = state => {
     return({
-        addressesList:getAddressesList(state)
+        addressesList:getAddressesList(state),
+        cardsData:getCardsData(state),
+        userToken:getUserToken(state),
     })
 }
 const mapDispatchToProps = (dispatch) => {
-    console.log(dispatch)
+  
     return ({
         getAddresses: () => {
             dispatch(fetchAddressesList())

@@ -13,7 +13,6 @@ import { getIsLoggedIn } from './reducers'
 
 function App (props) {
         var {isLoggedIn} = props;
-        console.log(isLoggedIn);
 
         if(isLoggedIn) {
             return (
