@@ -1,13 +1,8 @@
-import {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,fetchCardDataRequest} from './Actions/actions';
+import {sendRegistrationRequest} from './Actions/actions';
 import {LOGIN_USER} from './Actions/actions'; 
 import {isLogged} from './Actions/actions'; 
 
 export const registrationMiddleware = store => next => action => {
-    // console.log(JSON.stringify(action.payload));
-    // console.log(action.type);
-    // console.log(LOGIN_USER);
-    // console.log('{ "email": "test5@test.com", "password": "000000", "name": "NAME", "surname": "SURNAME" }');
-    var userToken;
     if(action.type === sendRegistrationRequest.toString()) {
         fetch('https://loft-taxi.glitch.me/register',{
             method : 'POST',
@@ -30,7 +25,6 @@ export const registrationMiddleware = store => next => action => {
         .then(response => response.json())
         .then(result =>{
             // console.log(result.token);
-            userToken = result.token;
             store.dispatch(isLogged(result.token))
             // console.log('after middleware REQ');
             // console.log(store.getState());

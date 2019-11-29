@@ -1,13 +1,23 @@
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {shallow,mount} from 'enzyme';
-import Registration from './components/Registration';
+
+
 import {render} from '@testing-library/react';
-import renderer from 'react-test-renderer';
+
+import {Provider} from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import Registrattion from './components/Header';
+import createStore from './store';
+
+const store = createStore();
 
 
-it('Registration Snapshot', () => {
-    const tree = renderer.create(<Registration/>).toJSON();
-    expect(tree).toMatchSnapshot();
-})
+
+test("Render Layout", () => {
+    render(
+      <BrowserRouter initialEntries={["/"]}>
+        <Provider store={store}>
+          <Registrattion />
+        </Provider>
+      </BrowserRouter>
+    )
+  })

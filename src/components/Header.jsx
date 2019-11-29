@@ -1,10 +1,8 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import '../styles/Header.css';
-import { Link, Route, Switch } from 'react-router-dom';
-import Map from '../components/Map';
-import Profile from '../components/Profile';
-import {LogoutAction,getProfileDataRequest} from '../Actions/actions';
+import { Link } from 'react-router-dom';
+import {LogoutAction} from '../Actions/actions';
 import { connect } from 'react-redux';
 import {getUserToken} from '../reducers'
 

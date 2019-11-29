@@ -1,25 +1,37 @@
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {shallow,mount} from 'enzyme';
-import Background from './components/Background';
-import Header from './components/Header';
+import App from './App'
+
 import {render} from '@testing-library/react';
-import myContext from '../src/context' ;
-import renderer from 'react-test-renderer';
 
-const {Provider} = myContext;
+import {Provider} from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-it('Background Snapshot', () => {
-    const tree = renderer.create(<App/>).toJSON();
-    expect(tree).toMatchSnapshot();
-})
+import createStore from './store';
 
+const store = createStore();
+
+
+// const {Provider} = myContext;
+
+// it('renders without crashing', () => {
+//   const div = document.createElement('div');
+//   ReactDOM.render(<App />, div);
+//   ReactDOM.unmountComponentAtNode(div);
+// });
+// it('Background Snapshot', () => {
+//     const tree = renderer.create(<App/>).toJSON();
+//     expect(tree).toMatchSnapshot();
+// })
+
+test("Render Layout", () => {
+    render(
+      <BrowserRouter initialEntries={["/"]}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    )
+  })
 
 
 

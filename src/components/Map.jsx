@@ -1,9 +1,9 @@
-import React,{useEffect,useState} from 'react';
+import React from 'react';
 import mapboxgl from 'mapbox-gl';
 // import ReactMapGL from 'react-map-gl';
 import CallTaxi from './CallTaxi';
 import {connect} from 'react-redux'
-import {getAddressesList} from '../reducers';
+
 import {fetchAddressesList,fetchCardDataRequest,setOrderCoords} from '../Actions/actions';
 import { Link } from 'react-router-dom';
 import {getUserToken} from '../reducers';
@@ -12,11 +12,9 @@ import {getUserToken} from '../reducers';
 
 class Map extends React.Component {
 
-    constructor(props){
-        super(props);
-        console.log(props);
-        console.log(props.cardData.cardNumber === '');
-    }
+    // constructor(props){
+    //     super(props);
+    // }
     componentDidMount(){
         this.props.getCardData(this.props.userToken);
         mapboxgl.accessToken = 'pk.eyJ1IjoidHdlZWN6IiwiYSI6ImNrMjRtaHIxYjBnemYzbXJ3aWViNXdrNjEifQ.76mRux1cIMwrvLuGh6f3Gw';
@@ -27,7 +25,7 @@ class Map extends React.Component {
             zoom: 9,
             center: [30.19, 59.87]
         });
-        console.log('mounted COMPONENT')
+
        
     }
 
@@ -36,7 +34,7 @@ class Map extends React.Component {
         if(this.props.coords.length) {
             this.draw(this.map,this.props.coords);
         }
-        console.log(this.props)
+       
         if(this.props.newOrder) {
             if (this.map.getLayer('route')) {
                 this.map.removeLayer('route'); this.map.removeSource('route');

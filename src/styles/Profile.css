@@ -2,17 +2,33 @@
     /* display: flex;
     flex-direction: column; */
     text-align: center;
+
 }
 .profile__info-wrap{
     display: flex;
     flex-direction: column;
-    width:100%
+    width:100%;
+    
 }
 .profile__info-label{
     margin-bottom: 10px;
+    text-align: left;
+    color:grey;
+    font-size: 12px;
 }
 .profile__info-input{
    margin-bottom: 10px;
+   font-size: 17px;
+   border-bottom:1px solid black;
+   width:95%;
+   margin-top: 10px;
+}
+
+.profile__info-input:hover,
+.profile__info-input:active,
+.profile__info-input:focus
+{
+    border-bottom:1px solid 2px solid rgb(178, 138, 16);
 }
 .profile__form-submit{
     padding: 15px 20px;
@@ -23,10 +39,15 @@
     border:none;
 }
 .profile__info{
-    border:1px solid black;
-    width: 300px;
-    padding:20px;
+    /* border:1px solid black; */
+    /* width: 300px; */
+
+    width:45%;
+    padding:30px 20px;
     border-radius: 5px;
+    position: relative;
+    box-shadow: 
+    0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)
 }
 .profile{
     display: flex;
@@ -43,8 +64,50 @@
 }
 .profile__header-wrap > h2{
     font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 5px;
 }
 .profile__header-wrap > h4{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
+    color:gray;
+}
+.background--profile {
+    /* align-items: flex-start !important; */
+   
+} 
+.profile{
+    /* margin-top: 10%; */
+    border-radius: 8px;
+}
+.card-img{
+    position: absolute;
+    top:5px;
+    right:10px;
+}
+.profile__change-submit-wrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile__change-text{
+    margin-bottom: 35px;
+    text-align: center;
+}
+.profile__change-submit{
+    padding: 10px 15px;
+    background-color: #ffc617;
+    border-radius: 4px;
+    /* text-transform: uppercase; */
+    font-weight: 500;
+    border:none;
+    display: block;
+    width:150px;
+    font-size: 12px;
+    text-align: center;
+    color:black;
+}
+.login__form-error{
+    color:red;
+    margin-bottom : 10px;
 }

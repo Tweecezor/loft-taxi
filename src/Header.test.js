@@ -1,13 +1,23 @@
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {shallow,mount} from 'enzyme';
-import Header from './components/Header';
+
+
 import {render} from '@testing-library/react';
-import renderer from 'react-test-renderer';
+
+import {Provider} from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import Header from './components/Header';
+import createStore from './store';
+
+const store = createStore();
 
 
-it('Header Snapshot', () => {
-    const tree = renderer.create(<Header/>).toJSON();
-    expect(tree).toMatchSnapshot();
-})
+
+test("Render Layout", () => {
+    render(
+      <BrowserRouter initialEntries={["/"]}>
+        <Provider store={store}>
+          <Header />
+        </Provider>
+      </BrowserRouter>
+    )
+  })

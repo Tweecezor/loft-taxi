@@ -28,9 +28,9 @@ const getCardsData = userToken =>
 function * getCardsDataFromServer(){
     yield takeEvery(fetchCardDataRequest, function* (action){
         try{
-            console.log(action);
+            // console.log(action);
             const result = yield call(getCardsData,action.payload.userToken);
-            console.log(result);   
+            // console.log(result);   
             yield put(getProfileDataRequest(result))
         }
         catch(error){
@@ -50,9 +50,9 @@ function* setCardsDataToComponent(){
    
     yield takeEvery(sendProfileDataRequest, function* (action){
         try{
-            console.log(action);
+            // console.log(action);
             const result = yield call(setCardsData,action);
-            console.log(result);
+            // console.log(result);
             yield put(setProfileDataRequest(action.payload))
            
         }
@@ -73,9 +73,9 @@ const regUser = (action) => {
 function* userRegistration(){
     yield takeEvery(sendRegistrationRequest, function* (action){
         try{
-            console.log(action);
+            // console.log(action);
             const result = yield call(regUser,action);
-            console.log(result);
+            // console.log(result);
            
         }
         catch(error){
@@ -98,9 +98,9 @@ const login = (action) => {
 function* userLogin(){
     yield takeEvery(LogginAction, function* (action){
         try{
-            console.log(action);
+            // console.log(action);
             const result = yield call(login,action);
-            console.log(result);
+            // console.log(result);
             let userToken = result.token;
             yield put(isLogged({isLoggedIn:true,userToken}))  
          
@@ -121,12 +121,12 @@ const getAddresses = () =>
 function* getAddressesList(){
     yield takeEvery(fetchAddressesList,function*(action){
         try{
-            console.log(action);
+            // console.log(action);
             const result = yield call(getAddresses,action);
-            console.log(result);
+            // console.log(result);
             yield put(setAddressesList(result));
             const state =  yield select(state=>state);
-            console.log(state);
+            // console.log(state);
         }
         catch(error){
 
@@ -144,10 +144,10 @@ function* getOrderCoords(){
     yield takeEvery(fetchOrderAddresses,function*(action){
         try{
             const result = yield call(getCoords,action.payload);
-            console.log(result);
+            // console.log(result);
             yield put(setOrderCoords(result));
             const state =  yield select(state=>state);
-            console.log(state);
+            // console.log(state);
         }
         catch(error){
 

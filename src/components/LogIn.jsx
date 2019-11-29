@@ -3,28 +3,61 @@ import PropTypes from 'prop-types';
 import '../styles/Login.css';
 import {Link} from 'react-router-dom';
 
+import { Form, Field } from "react-final-form";
+
 import {LogginAction} from '../Actions/actions';
 import { connect } from 'react-redux';
 
 const Login = props => {
 
-    var [email,setEmail] = React.useState('');
+    // var [email,setEmail] = React.useState('');
 
-    var [password,setPassword] = React.useState('');
+    // var [password,setPassword] = React.useState('');
    
-    const handleInputEmail = (e) => {
-        setEmail(email = e.target.value);
-    }
+    // const handleInputEmail = (e) => {
+    //     setEmail(email = e.target.value);
+    // }
 
-    const handleInputPassword = (e) => {
-        setPassword(password = e.target.value);
-    }
-    const submitForm = e => {
-        e.preventDefault();
-        props.userLogin(email,password);
+    // const handleInputPassword = (e) => {
+    //     setPassword(password = e.target.value);
+    // }
+    // const submitForm = e => {
+    //     e.preventDefault();
+    //     // console.log(email,password);
+    //     // props.userLogin(email,password);
        
-    }
+    // }
+    // const [errorColor,setErrorColor] = useState('lightgray')
+    // const style = {
+    //     borderBottom:`1px solid ${errorColor}`,
+    // }
 
+    const handleSubmit = values => {
+        props.userLogin(values);
+      };
+    const inputPassword = ({input,meta,label}) => {
+        return(
+            <div className = 'login__form-wrap'>
+                <label className = 'login__form-label' htmlFor = "name">{label}</label>
+                <input className = 'login__form-input' name="password" type="password" {...input} ></input>
+                {meta.error && meta.visited && !meta.active &&
+                    <div className="login__form-error">{meta.error}</div>    
+                }
+            </div>
+        )
+    }
+    const inputEmail = ({input,meta,label}) => {
+        return(
+            <div className = 'login__form-wrap'>
+                <label  className = 'login__form-label' htmlFor = "name">{label}</label>
+                <input  className = 'login__form-input' name="email" type="text" {...input} ></input>
+                {meta.error && meta.visited && !meta.active &&
+                    <div className = "login__form-error" >{meta.error}</div>  
+                }
+            </div>
+        )
+    }
+   
     return(
         <div className = 'login'>
             <div className = 'login__caption-wrap'>
@@ -34,17 +67,25 @@ const Login = props => {
                 <span className = 'login__question-text'>Новый пользователь?</span>
                 <Link to={'/registration'}>Зарегистрирутесь</Link>
             </div>
-            <form action="" className = 'login__form' onSubmit = {submitForm}>
-                <div className = 'login__form-wrap'>
-                    <label className = 'login__form-label' htmlFor = "name">Имя*</label>
-                    <input className = 'login__form-input' type = "text" name = 'email' id = 'name' onChange = {handleInputEmail} />
-                </div>
-                <div className = 'login__form-wrap'>
-                    <label className = 'login__form-label' htmlFor = "password">Пароль*</label>
-                    <input className = 'login__form-input' type = "password" name = 'password' id = 'password' onChange = {handleInputPassword} />
-                </div>
-                <input className = 'login__form-submit' type="submit" value = 'Войти' />
-            </form>
+            <Form
+                onSubmit={handleSubmit}
+                validate={values => {
+                    const errors = {};
+                    if (!values.email){
+                        errors.email = "Заполните поле";
+                        };
+                    if (!values.password) errors.password = "Заполните поле";
+
+                    return errors;
+                }}
+                render={({ handleSubmit }) => (
+                <form className = 'login__form' onSubmit={handleSubmit}>
+                    <Field name="email" label="Имя*" className = 'login__form-label' component={inputEmail} />
+                    <Field name="password" label="Пароль*" className = 'login__form-label' component={inputPassword} />
+                    <button type="submit" className = 'login__form-submit'>Войти</button>
+                </form>
+                )}
+            />
         </div>  
     )
 }
@@ -61,8 +102,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        userLogin : (email,password)=> {
-            dispatch(LogginAction({email,password}));
+        userLogin : (data)=> {
+            dispatch(LogginAction(data));
         }
     })
 }
@@ -71,4 +112,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Login);
-// export default Login;
