@@ -15,7 +15,7 @@ it('when user login then isLoggedIn = true',()=>{
     //action
     var action = isLogged({isLoggedIn:true})
     let newState = LoginReducer(state,action);
-    console.log(newState.isLoggedIn);
+
     //expectation
     expect(newState.isLoggedIn).toBe(true)
 })

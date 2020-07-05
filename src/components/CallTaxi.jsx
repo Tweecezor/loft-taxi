@@ -96,6 +96,8 @@ const OrderComponent = (props) =>{
     const submitNewOrder = () => {
         props.setNewOrderStatus(true);
         setOrderStatus(false);
+        setAddressTo('');
+        setAddressFrom('');
     }
     
     if(!orderStatus){
@@ -103,7 +105,7 @@ const OrderComponent = (props) =>{
             <div className = 'order' onClick={onInputClicked}>
                 <div className = 'order__menu-wrap'>
                     <div className = 'order__menu-direction'>
-                        <label htmlFor="from">
+                        <label className="input_label" htmlFor="from">
                             <input data-input='from' autoComplete="off" value={addressFrom}  onChange={onInputChange} className = "addressInput" type="text" placeholder = "Откуда" id ="from"/>
                         </label>
                         {
@@ -119,7 +121,7 @@ const OrderComponent = (props) =>{
                     
                     </div>
                     <div className = 'order__menu-direction'>
-                        <label htmlFor="where">
+                        <label className="input_label" htmlFor="where">
                             <input data-input='to' autoComplete="off" value={addressTo} onChange={onInputChange}   className = "addressInput" type="text" placeholder = "Куда" id = "where"/>
                         </label>
                     
@@ -133,7 +135,7 @@ const OrderComponent = (props) =>{
                         }
                     
                     </div>
-                    <input onClick={submitOrder} type="button" value="Вызвать такси" className = "order__button"/>
+                    <input onClick={submitOrder} disabled={addressFrom && addressTo ? '' : 'disabled'} type="button" value="Вызвать такси" className = "order__button"/>
                 </div>
             </div>
         )
@@ -144,7 +146,7 @@ const OrderComponent = (props) =>{
                 <p className="order__text">
                 Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.
                 </p>
-                <input onClick={submitNewOrder}  type="button" value="Сделать еще один заказ" className = "order__button"/>
+                <input onClick={submitNewOrder}  type="button" value="Сделать новый заказ" className = "order__button"/>
             </div>
         )
     }

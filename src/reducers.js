@@ -9,7 +9,7 @@ const {sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,
     fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,
     changeCardCVC,LogginAction,isLogged,setProfileDataRequest,
     fetchAddressesList,setAddressesList,setOrderCoords,fetchOrderAddresses,
-    LogoutAction,setNewOrder
+    LogoutAction,setNewOrder,setRegResponse
 } = allActions;
 
 // const initLoggedState = {
@@ -19,13 +19,16 @@ const initUser = {
     email:'',
     password:'',
     isLoggedIn:false,
-    userToken:''
+    userToken:'',
+    error:false
 }
 const initRegistrationUserState = {
     email:'',
     password:'',
     name:'',
-    surname:''
+    surname:'',
+    success:false,
+    error:false
 }
 const initProfileDataState = {
     cardNumber:'',
@@ -48,7 +51,6 @@ export const OrderCoordsReducer = (state = initOrderCoords,action) => {
                 ...state
             }
         case setOrderCoords.toString() :
-            console.log(action.payload);
             return {
                 ...state,
                 coords:action.payload
@@ -73,10 +75,12 @@ export const LoginReducer = ( state = initUser, action ) => {
                 ...state
             }
         case isLogged.toString() : 
+            // debugger;
             return {
                 ...state,
                 isLoggedIn: action.payload.isLoggedIn,
-                userToken: action.payload.userToken
+                userToken: action.payload.userToken,
+                error:action.payload.error
             }
         case LogoutAction.toString() :
             return {
@@ -98,6 +102,13 @@ export const RegistrationReducer = (state = initRegistrationUserState, action) =
                 password: action.payload.password,
                 name: action.payload.name,
                 surname: action.payload.surname,
+                success:action.payload.success
+            }
+        case setRegResponse.toString() :
+            return {
+                ...state,
+                success:action.payload.success,
+                error:action.payload.error
             }
         default:
             return state
@@ -106,6 +117,7 @@ export const RegistrationReducer = (state = initRegistrationUserState, action) =
 export const ProfileReducer = (state = initProfileDataState ,action) => {
     switch(action.type) {
         case changeCardNumber.toString():
+            console.log(action.payload);
             return {
                 ...state,
                 cardNumber:action.payload.cardNumber,
@@ -126,6 +138,7 @@ export const ProfileReducer = (state = initProfileDataState ,action) => {
                 cardCVC:action.payload.cardCVC
             }
         case setProfileDataRequest.toString():
+            console.log(action.payload);
             return {
                 ...state,
                 cardNumber:action.payload.cardNumber,

@@ -32,7 +32,7 @@ a{
   color: #09d3ac;
 }
 .container{
-    width:1170px;
+    width:95%;
     margin:0 auto;
 }
 /* .container--map{
@@ -105,3 +105,45 @@ input{
     position:absolute; top:0; bottom:0; width:100%;
 } */
 
+.container-map{
+    height: 100%;
+    position: relative;
+}
+#root{
+    position: relative;
+    overflow: hidden;
+  
+}
+.tooltipError{
+    position: absolute;
+    line-height: 50px;
+    background-color: #ffc617;
+    border-radius: 3px;
+    bottom: -10%;
+    color: black;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+}
+.tooltipErrorAnimation{
+    animation: errorAnimation 5s;
+}
+@keyframes errorAnimation {
+    0%{
+       bottom: -10%;
+    }
+    25%{
+        bottom:0%;
+    }
+    50%{
+        bottom:0%;
+    }
+    75%{
+        bottom:-10%;
+    }
+    100%{
+        bottom:-10%;
+    }
+
+}

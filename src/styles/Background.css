@@ -8,3 +8,16 @@
     align-items: center;
    justify-content: space-evenly;
 }
+
+.background__logo-wrapper{
+    animation: logoAnimation 2.5s;
+}
+@keyframes logoAnimation {
+    from{
+        transform:translateX(-1000px);
+    }
+    to{
+        transform:translateX(0px);
+    }
+
+}

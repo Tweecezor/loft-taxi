@@ -1,5 +1,5 @@
 // import * as allActions  from './actions'; 
-import {setNewOrder,LogoutAction,setOrderCoords,fetchOrderAddresses,setAddressesList,fetchAddressesList,isLogged,LogginAction,sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC,setProfileDataRequest} from './actions'
+import {setRegResponse,setNewOrder,LogoutAction,setOrderCoords,fetchOrderAddresses,setAddressesList,fetchAddressesList,isLogged,LogginAction,sendRegistrationRequest,sendProfileDataRequest,getProfileDataRequest,fetchCardDataRequest,changeCardNumber,changeCardData,changeCardOwner,changeCardCVC,setProfileDataRequest} from './actions'
 import {LOGIN_USER,LOGOUT_USER} from './actions'
 import {ISLOGGED} from './actions'
 
@@ -23,7 +23,8 @@ const allActions = {
     setOrderCoords,
     fetchOrderAddresses,
     LogoutAction,
-    setNewOrder
+    setNewOrder,
+    setRegResponse
 };
 
 export default  allActions 

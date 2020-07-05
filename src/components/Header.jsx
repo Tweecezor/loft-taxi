@@ -12,12 +12,10 @@ const HeaderComponent = (props) =>{
 
     const onClickLogoutButton = (e) => {
         e.preventDefault();
-        // console.log(LogginAction());
-        // debugger;
+
         props.userLogout()
     }
     const onClickProfile = (e) => {
-        // props.getCardData(props.userToken);
     }
 
     return(

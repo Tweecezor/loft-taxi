@@ -14,7 +14,7 @@ it('set New Order Status',()=>{
     var action = setNewOrder({newOrder:true})
 
     var newState = OrderCoordsReducer(state,action)
-    console.log(newState);
+
     //expectation
     expect(newState.newOrder).toBe(true);
     
@@ -27,7 +27,7 @@ it('set New Coords',()=>{
     var action = setOrderCoords([1,2,3,4])
 
     var newState = OrderCoordsReducer(state,action)
-    console.log(newState);
+
     //expectation
     expect(newState.coords.length).toBe(4);
     

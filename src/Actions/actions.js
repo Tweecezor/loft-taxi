@@ -46,6 +46,7 @@ export const getProfileDataRequest = createAction('GET_PROFILE_DATA_REQ');
 export const fetchCardDataRequest = createAction('GET_CARD_DATA');
 
 export const sendRegistrationRequest = createAction('SEND_REG_REQUEST');
+export const setRegResponse = createAction('SET_REG_RESPONSE');
 
 export const fetchAddressesList = createAction('GET_ADDRESSES');
 export const setAddressesList = createAction('SET_ADDRESSES');

@@ -111,3 +111,25 @@
     color:red;
     margin-bottom : 10px;
 }
+.withError > .profile__info-label{
+    color:red;
+}
+.withError > .profile__info-input{
+    border-bottom:1px solid red;
+}
+.profile__form-submit:hover{
+    cursor: pointer;
+    background-color: #daa508;
+}
+.profile__form-submit:focus{
+    background-color: #af8609;
+    
+}
+.profile__change-submit:hover{
+    cursor: pointer;
+    background-color: #daa508;
+}
+.profile__change-submit:focus{
+    background-color: #af8609;
+    
+}

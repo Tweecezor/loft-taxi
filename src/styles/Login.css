@@ -32,3 +32,23 @@
     font-weight: 800;
     border:none;
 }
+.withError > .login__form-label{
+    color:red;
+}
+.withError > .login__form-input{
+    border-bottom: 1px solid red;
+}
+.login__form-submit:hover{
+    cursor: pointer;
+    background-color: #daa508;
+}
+.login__form-submit:focus{
+    background-color: #af8609;
+    
+}
+.login__reg-link{
+    color:#1079f1
+}
+.login__reg-link:hover{
+    text-decoration: underline;
+}

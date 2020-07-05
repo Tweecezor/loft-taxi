@@ -31,7 +31,7 @@
     margin-bottom: 30px;
 }
 .reg__form-wrap--name,
-.reg__form-wrap--surename{
+.reg__form-wrap--surname{
     width:47%
 }
 .reg__form-wrap--name{
@@ -44,4 +44,35 @@
     text-transform: uppercase;
     font-weight: 800;
     border:none;
+}
+.reg__form-submit:hover{
+    cursor: pointer;
+    background-color: #daa508;
+}
+.reg__form-submit:focus{
+    background-color: #af8609;
+    
+}
+.reg__login-link{
+    color:#1079f1
+}
+.reg__login-link:hover{
+    text-decoration: underline;
+}
+.withError > .reg__form-label{
+    color:red;
+}
+.withError > .reg__form-input{
+   border-bottom:1px solid red;
+}
+.reg__success{
+    margin-bottom: 20px;
+}
+.reg__form-submit{
+    color:black ;
+}
+.reg--success{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

@@ -17,8 +17,16 @@
 .addressInput{
     width:100%;
 }
+.order__menu-direction:hover .addressInput{
+   border-bottom:1px solid black;
+}
+.addressInput:active{
+    border-bottom:1px solid blue;
+    outline: none;
+ }
 .order__menu-direction{
     margin-bottom: 20px;
+    position: relative;
 }
 .order__button{
     padding: 15px 20px;
@@ -29,6 +37,21 @@
     border: none;
     margin-bottom: 0;
 }
+.order__button:hover{
+    cursor: pointer;
+    background-color: #daa508;
+}
+.order__button:focus{
+    background-color: #af8609;
+    
+}
+.order__button:disabled{
+    background-color:lightgrey;
+}
+.order__button:disabled:hover{
+    background-color:lightgrey;
+    cursor: initial;
+}
 .order__menu{
     border:none;
     background:transparent;
@@ -38,9 +61,16 @@
     padding: 5px 0px;
     border: 1px solid black;
     border-radius: 5px;
+  
+}
+.drop-menu__item{
+    background: white;
+    padding:3px;
 }
 .drop-menu__item:hover{
+    padding:3px;
     background: lightgrey;
+    border-radius: 3px;
 }
 .order__header{
     font-size: 30px;
@@ -50,3 +80,24 @@
     margin-bottom: 30px;
     font-size: 20px;
 }
+.input_label{
+    position: relative;
+}
+.input_label::after{
+    content:'';
+    position: absolute; 
+    right:0;
+    top:30%;
+    width:10px;
+    height: 10px;
+    background-image: url('../img/angle-arrow-down_icon-icons.com_73683.svg');
+    /* background-position: -50px; */
+    background-size: cover;
+    fill:grey;
+
+
+}
+.order__menu-direction:hover .addressInput{
+    border-bottom:1px solid black;
+ }
+

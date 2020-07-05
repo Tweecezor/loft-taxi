@@ -4,16 +4,13 @@ import Header from './components/Header';
 import Background from './components/Background';
 import {Route,Switch,Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { BrowserRouter } from 'react-router-dom';
 import Profile from './components/Profile';
-// import Login from './components/LogIn';
-// import RegistrationComponent from './components/Registration';
+
 import Map from './components/Map';
 import { getIsLoggedIn } from './reducers'
 
 function App (props) {
         var {isLoggedIn} = props;
-
         if(isLoggedIn) {
             return (
                 <div className = 'root-wrapper'>
