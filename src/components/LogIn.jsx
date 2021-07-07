@@ -1,59 +1,79 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Login.css';
-import {Link,Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import {LogginAction,getProfileDataRequest,getCardDataRequest} from '../Actions/actions';
+import { Form, Field } from "react-final-form";
+
+import {LogginAction,isLogged} from '../Actions/actions';
 import { connect } from 'react-redux';
 
 const Login = props => {
 
-    var [email,setEmail] = React.useState('');
 
-    var [password,setPassword] = React.useState('');
+    const handleSubmit = values => {
+        props.userLogin(values);
+      };
+    const inputPassword = ({input,meta,label}) => {
+
+        return(
+            <div className =  {meta.error && meta.visited & !meta.active ? 'withError login__form-wrap' : 'login__form-wrap'}>
+                <label className = 'login__form-label' htmlFor = "name">{label}</label>
+                <input className = 'login__form-input' name="password" type="password" {...input} ></input>
+                {meta.error && meta.visited && !meta.active &&
+                    <div className="login__form-error">{meta.error}</div>    
+                }
+            </div>
+        )
+    }
+    const inputEmail = ({input,meta,label}) => {
+        return(
+            <div className =  {meta.error && meta.visited & !meta.active ? 'withError login__form-wrap' : 'login__form-wrap'}>
+                <label  className = 'login__form-label' htmlFor = "name">{label}</label>
+                <input  className = 'login__form-input' name="email" type="text" {...input} ></input>
+                {meta.error && meta.visited && !meta.active &&
+                    <div className = "login__form-error" >{meta.error}</div>  
+                }
+            </div>
+        )
+    }
+
    
-    const handleInputEmail = (e) => {
-        setEmail(email = e.target.value);
-    }
-
-    const handleInputPassword = (e) => {
-        setPassword(password = e.target.value);
-    }
-    const submitForm = e => {
-        e.preventDefault();
-        props.userLogin(email,password);
-       
-    }
-
-    // const onClickLoginButton = (e) => {
-    //     e.preventDefault();
-    //     // console.log(LogginAction());
-    //     // debugger;
-        
-    // }
-
-
     return(
-        <div className = 'login'>
-            <div className = 'login__caption-wrap'>
-                <h2 className = 'login__caption '>Войти</h2>
-            </div>
-            <div className = 'login__question'>
-                <span className = 'login__question-text'>Новый пользователь?</span>
-                <Link to={'/registration'}>Зарегистрирутесь</Link>
-            </div>
-            <form action="" className = 'login__form' onSubmit = {submitForm}>
-                <div className = 'login__form-wrap'>
-                    <label className = 'login__form-label' htmlFor = "name">Имя*</label>
-                    <input className = 'login__form-input' type = "text" name = 'email' id = 'name' onChange = {handleInputEmail} />
+        <>
+            <div className = 'login'>
+                <div className = 'login__caption-wrap'>
+                    <h2 className = 'login__caption '>Войти</h2>
                 </div>
-                <div className = 'login__form-wrap'>
-                    <label className = 'login__form-label' htmlFor = "password">Пароль*</label>
-                    <input className = 'login__form-input' type = "password" name = 'password' id = 'password' onChange = {handleInputPassword} />
+                <div className = 'login__question'>
+                    <span className = 'login__question-text'>Новый пользователь? </span>
+                    <Link onClick={props.resetError} className='login__reg-link' to={'/registration'}>Зарегистрирутесь</Link>
                 </div>
-                <input className = 'login__form-submit' type="submit" value = 'Войти' />
-            </form>
-        </div>  
+                <Form
+                    onSubmit={handleSubmit}
+                    validate={values => {
+                        const errors = {};
+                        if (!values.email){
+                            errors.email = "Заполните поле";
+                            };
+                        if (!values.password) errors.password = "Заполните поле";
+
+                        return errors;
+                    }}
+                    render={({ handleSubmit }) => (
+                    <form className = 'login__form' onSubmit={handleSubmit}>
+                        <Field name="email" label="Имя*" className = 'login__form-label' component={inputEmail} />
+                        <Field name="password" label="Пароль*" className = 'login__form-label' component={inputPassword} />
+                        <button type="submit" className = 'login__form-submit'>Войти</button>
+                    
+                    </form>
+                    )}
+                />
+            </div>  
+            <div className={props.error === true ?'tooltipError tooltipErrorAnimation' : 'tooltipError'}>
+                <h1>Неверный логин или пароль</h1>
+            </div>
+        </>
     )
 }
 
@@ -64,17 +84,18 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => {
     return({
+        error:state.LoginReducer.error
     })
 }
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        userLogin : (email,password)=> {
-            dispatch(LogginAction({email,password}));
+        resetError: () => {
+            dispatch(isLogged({error:false}))
         },
-        // getCardData : ()=>{
-        //     dispatch(getCardDataRequest({}))
-        // }
+        userLogin : (data)=> {
+            dispatch(LogginAction(data));
+        }
     })
 }
 
@@ -82,4 +103,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Login);
-// export default Login;

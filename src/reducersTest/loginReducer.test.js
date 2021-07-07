@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import {isLogged,LogoutAction,LOGIN_USER,LOGOUT_USER} from '../Actions/actions'
 import {LoginReducer} from '../reducers';
 
-var action = isLogged('token');
+
 var state = {
     isLoggedIn:false,
     userToken:''
@@ -13,6 +13,7 @@ it('when user login then isLoggedIn = true',()=>{
     // test data
   
     //action
+    var action = isLogged({isLoggedIn:true})
     let newState = LoginReducer(state,action);
 
     //expectation
@@ -22,19 +23,21 @@ it('when user login then userToken = token',()=>{
     // test data
   
     //action
+    var action = isLogged({userToken:'token'});
     let newState = LoginReducer(state,action);
 
     //expectation
     expect(newState.userToken).toBe('token')
 })
-it('when user login then userToken = token',()=>{
+it('when user logout then isLoggedIn = false',()=>{
     // test data
-    let action = LogoutAction();
+   
     let state = {
     isLoggedIn:true,
     userToken:'token'
 }
     //action
+    let action = LogoutAction({isLoggedIn:false,userToken:''});
     let newState = LoginReducer(state,action);
 
     //expectation

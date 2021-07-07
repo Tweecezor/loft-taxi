@@ -1,10 +1,8 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import '../styles/Header.css';
-import { Link, Route, Switch } from 'react-router-dom';
-import Map from '../components/Map';
-import Profile from '../components/Profile';
-import {LogoutAction,getProfileDataRequest} from '../Actions/actions';
+import { Link } from 'react-router-dom';
+import {LogoutAction} from '../Actions/actions';
 import { connect } from 'react-redux';
 import {getUserToken} from '../reducers'
 
@@ -14,12 +12,10 @@ const HeaderComponent = (props) =>{
 
     const onClickLogoutButton = (e) => {
         e.preventDefault();
-        // console.log(LogginAction());
-        // debugger;
+
         props.userLogout()
     }
     const onClickProfile = (e) => {
-        // props.getCardData(props.userToken);
     }
 
     return(
@@ -33,7 +29,7 @@ const HeaderComponent = (props) =>{
                     <nav className = 'nav nav--header'>
                         <ul className = 'nav__list'>
                             <li className="nav__item active">
-                                <Link to={`/map`} className = 'nav__link'>Карта</Link>{' '}  
+                                <Link to={`/map`} className = 'nav__link'>Карта</Link>
                             </li>
                             <li className="nav__item" >
                                 <Link to={`/profile`} className = 'nav__link' onClick = {onClickProfile}>Профиль</Link>{' '} 
@@ -63,7 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         userLogout : ()=> {
-            dispatch(LogoutAction());
+            dispatch(LogoutAction({isLoggedIn:false}));
         },
         // getCardData : (userToken)=>{ 
         //     dispatch(getProfileDataRequest({userToken}))

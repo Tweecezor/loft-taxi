@@ -32,7 +32,7 @@ a{
   color: #09d3ac;
 }
 .container{
-    width:1170px;
+    width:95%;
     margin:0 auto;
 }
 /* .container--map{
@@ -70,6 +70,34 @@ input{
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+.bigTEXT{
+    width:100px;
+    height: 200px;
+    background:white;
+    border:2px solid black;
+    z-index: 20;
+}
+.warninng-block{
+    position: absolute;
+    top:25%;
+    left:10%;
+    background: #fff;
+    padding:40px 40px;
+    z-index: 10;
+    width:350px;
+}
+.link-btn{
+    padding: 15px 20px;
+    background-color: #ffc617;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    border: none;
+    margin-bottom: 0;
+}
+.warning_header{
+    margin-bottom: 20px;
+}
 /* .registration__logo{
     margin-right: 50px;
 } */
@@ -77,3 +105,45 @@ input{
     position:absolute; top:0; bottom:0; width:100%;
 } */
 
+.container-map{
+    height: 100%;
+    position: relative;
+}
+#root{
+    position: relative;
+    overflow: hidden;
+  
+}
+.tooltipError{
+    position: absolute;
+    line-height: 50px;
+    background-color: #ffc617;
+    border-radius: 3px;
+    bottom: -10%;
+    color: black;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+}
+.tooltipErrorAnimation{
+    animation: errorAnimation 5s;
+}
+@keyframes errorAnimation {
+    0%{
+       bottom: -10%;
+    }
+    25%{
+        bottom:0%;
+    }
+    50%{
+        bottom:0%;
+    }
+    75%{
+        bottom:-10%;
+    }
+    100%{
+        bottom:-10%;
+    }
+
+}

@@ -33,9 +33,6 @@ const Login = (props) => {
 
     const submitForm = e => {
         e.preventDefault();
-        // console.log('fdsret');
-        // console.log(name);
-        // console.log(password);
         setPage('map');
     }
 
